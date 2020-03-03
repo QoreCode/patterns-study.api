@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd9f0218-c4c7-4d7a-ba96-6f4e52eef38a" name="Default Changelist" comment="" />
+    <list default="true" id="fd9f0218-c4c7-4d7a-ba96-6f4e52eef38a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Note.php" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +19,9 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -72,6 +82,7 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1WldH3hwwAgZZQVqtrzHh9vmp3x" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -79,6 +90,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -95,7 +107,12 @@
       <updated>1579728023316</updated>
       <workItem from="1579728024614" duration="80000" />
       <workItem from="1579728337992" duration="714000" />
-      <workItem from="1579729066060" duration="629000" />
+      <workItem from="1579729066060" duration="728000" />
+      <workItem from="1580664795468" duration="1740000" />
+      <workItem from="1581971218094" duration="673000" />
+      <workItem from="1583074458220" duration="12000" />
+      <workItem from="1583074638579" duration="2960000" />
+      <workItem from="1583219430294" duration="3454000" />
     </task>
     <servers />
   </component>
@@ -107,6 +124,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="552" y="184" key="#Composer/0.0.1920.1050@0.0.1920.1050" timestamp="1579728375601" />
+    <state x="719" y="328" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580666331554">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="719" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1580666331554" />
     <state x="461" y="168" key="SettingsEditor" timestamp="1579729051784">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -115,6 +136,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="661" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1579729069026" />
+    <state x="657" y="123" width="606" height="804" key="find.popup" timestamp="1580665985285">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="657" y="123" width="606" height="804" key="find.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1580665985285" />
     <state x="616" y="243" key="run.anything.popup" timestamp="1579728828438">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
