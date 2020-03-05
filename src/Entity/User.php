@@ -5,11 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -42,6 +43,12 @@ class User
      * @ORM\OneToMany(targetEntity="App\Entity\Progress", mappedBy="user", orphanRemoval=true)
      */
     private $progresses;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\UserRole", inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $role;
 
     public function __construct()
     {
@@ -128,6 +135,50 @@ class User
                 $progress->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        return md5('QoreCodeSalt bitches');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUsername()
+    {
+       return $this->getLogin();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getRole(): ?UserRole
+    {
+        return $this->role;
+    }
+
+    public function setRole(?UserRole $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
