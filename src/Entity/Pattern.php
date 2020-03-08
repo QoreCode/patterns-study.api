@@ -2,57 +2,73 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PatternRepository")
+ * Pattern
+ *
+ * @ORM\Table(name="pattern", indexes={@ORM\Index(name="IDX_A3BCFC8E12469DE2", columns={"category_id"})})
+ * @ORM\Entity
+ * @ApiResource
  */
 class Pattern
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=0, nullable=false)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="difficult", type="integer", nullable=false)
      */
     private $difficult;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="popularity", type="integer", nullable=false)
      */
     private $popularity;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Progress", mappedBy="pattern")
-     */
-    private $progresses;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PatternCategory", inversedBy="pattern")
-     * @ORM\JoinColumn(nullable=false)
+     * @var \PatternCategory
+     *
+     * @ORM\ManyToOne(targetEntity="PatternCategory")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * })
      */
     private $category;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Test", mappedBy="category")
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Test", mappedBy="pattern")
      */
-    private $tests;
+    private $test;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->progresses = new ArrayCollection();
-        $this->tests = new ArrayCollection();
+        $this->test = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,24 +112,6 @@ class Pattern
         return $this;
     }
 
-    /**
-     * @return Collection|Progress[]
-     */
-    public function getProgresses(): Collection
-    {
-        return $this->progresses;
-    }
-
-    public function addProgress(Progress $progress): self
-    {
-        if (!$this->progresses->contains($progress)) {
-            $this->progresses[] = $progress;
-            $progress->setPattern($this);
-        }
-
-        return $this;
-    }
-
     public function getCategory(): ?PatternCategory
     {
         return $this->category;
@@ -129,16 +127,16 @@ class Pattern
     /**
      * @return Collection|Test[]
      */
-    public function getTests(): Collection
+    public function getTest(): Collection
     {
-        return $this->tests;
+        return $this->test;
     }
 
     public function addTest(Test $test): self
     {
-        if (!$this->tests->contains($test)) {
-            $this->tests[] = $test;
-            $test->addCategory($this);
+        if (!$this->test->contains($test)) {
+            $this->test[] = $test;
+            $test->addPattern($this);
         }
 
         return $this;
@@ -146,11 +144,12 @@ class Pattern
 
     public function removeTest(Test $test): self
     {
-        if ($this->tests->contains($test)) {
-            $this->tests->removeElement($test);
-            $test->removeCategory($this);
+        if ($this->test->contains($test)) {
+            $this->test->removeElement($test);
+            $test->removePattern($this);
         }
 
         return $this;
     }
+
 }

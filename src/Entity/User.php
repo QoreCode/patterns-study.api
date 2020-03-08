@@ -2,58 +2,54 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity
+ * @ApiResource
  */
-class User implements UserInterface
+class User
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="login", type="string", length=255, nullable=false)
      */
     private $login;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="birthday", type="datetime", nullable=true)
      */
     private $birthday;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Progress", mappedBy="user", orphanRemoval=true)
-     */
-    private $progresses;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\UserRole", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $role;
-
-    public function __construct()
-    {
-        $this->progresses = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -108,78 +104,5 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Progress[]
-     */
-    public function getProgresses(): Collection
-    {
-        return $this->progresses;
-    }
 
-    public function addProgress(Progress $progress): self
-    {
-        if (!$this->progresses->contains($progress)) {
-            $this->progresses[] = $progress;
-            $progress->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProgress(Progress $progress): self
-    {
-        if ($this->progresses->contains($progress)) {
-            $this->progresses->removeElement($progress);
-            // set the owning side to null (unless already changed)
-            if ($progress->getUser() === $this) {
-                $progress->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoles()
-    {
-        // TODO: Implement getRoles() method.
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getSalt()
-    {
-        return md5('QoreCodeSalt bitches');
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getUsername()
-    {
-       return $this->getLogin();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
-    }
-
-    public function getRole(): ?UserRole
-    {
-        return $this->role;
-    }
-
-    public function setRole(?UserRole $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
 }

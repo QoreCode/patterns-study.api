@@ -2,39 +2,69 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProgressRepository")
+ * Progress
+ *
+ * @ORM\Table(name="progress", indexes={@ORM\Index(name="IDX_2201F246A76ED395", columns={"user_id"}), @ORM\Index(name="IDX_2201F246F734A20F", columns={"pattern_id"})})
+ * @ORM\Entity
+ * @ApiResource
  */
 class Progress
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="progresses")
-     * @ORM\JoinColumn(nullable=false)
+     * @var int|null
+     *
+     * @ORM\Column(name="percent", type="integer", nullable=true)
+     */
+    private $percent;
+
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Pattern", inversedBy="progresses")
+     * @var \Pattern
+     *
+     * @ORM\ManyToOne(targetEntity="Pattern")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="pattern_id", referencedColumnName="id")
+     * })
      */
     private $pattern;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $percent;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getPercent(): ?int
+    {
+        return $this->percent;
+    }
+
+    public function setPercent(?int $percent): self
+    {
+        $this->percent = $percent;
+
+        return $this;
     }
 
     public function getUser(): ?User
@@ -61,15 +91,5 @@ class Progress
         return $this;
     }
 
-    public function getPercent(): ?int
-    {
-        return $this->percent;
-    }
 
-    public function setPercent(int $percent): self
-    {
-        $this->percent = $percent;
-
-        return $this;
-    }
 }

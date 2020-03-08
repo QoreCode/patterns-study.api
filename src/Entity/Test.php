@@ -2,51 +2,71 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TestRepository")
+ * Test
+ *
+ * @ORM\Table(name="test")
+ * @ORM\Entity
+ * @ApiResource
  */
 class Test
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Pattern", inversedBy="tests")
-     */
-    private $category;
-
-    /**
-     * @ORM\Column(type="text")
+     * @var string
+     *
+     * @ORM\Column(name="question", type="text", length=0, nullable=false)
      */
     private $question;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\TestAnswer", mappedBy="test")
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Pattern", inversedBy="test")
+     * @ORM\JoinTable(name="test_pattern",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="test_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="pattern_id", referencedColumnName="id")
+     *   }
+     * )
      */
-    private $answers;
+    private $pattern;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->category = new ArrayCollection();
-        $this->answers = new ArrayCollection();
+        $this->pattern = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,32 +82,6 @@ class Test
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Pattern[]
-     */
-    public function getCategory(): Collection
-    {
-        return $this->category;
-    }
-
-    public function addCategory(Pattern $category): self
-    {
-        if (!$this->category->contains($category)) {
-            $this->category[] = $category;
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Pattern $category): self
-    {
-        if ($this->category->contains($category)) {
-            $this->category->removeElement($category);
-        }
 
         return $this;
     }
@@ -117,33 +111,29 @@ class Test
     }
 
     /**
-     * @return Collection|TestAnswer[]
+     * @return Collection|Pattern[]
      */
-    public function getAnswers(): Collection
+    public function getPattern(): Collection
     {
-        return $this->answers;
+        return $this->pattern;
     }
 
-    public function addAnswer(TestAnswer $answer): self
+    public function addPattern(Pattern $pattern): self
     {
-        if (!$this->answers->contains($answer)) {
-            $this->answers[] = $answer;
-            $answer->setTest($this);
+        if (!$this->pattern->contains($pattern)) {
+            $this->pattern[] = $pattern;
         }
 
         return $this;
     }
 
-    public function removeAnswer(TestAnswer $answer): self
+    public function removePattern(Pattern $pattern): self
     {
-        if ($this->answers->contains($answer)) {
-            $this->answers->removeElement($answer);
-            // set the owning side to null (unless already changed)
-            if ($answer->getTest() === $this) {
-                $answer->setTest(null);
-            }
+        if ($this->pattern->contains($pattern)) {
+            $this->pattern->removeElement($pattern);
         }
 
         return $this;
     }
+
 }

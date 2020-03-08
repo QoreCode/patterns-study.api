@@ -2,36 +2,33 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PatternCategoryRepository")
+ * PatternCategory
+ *
+ * @ORM\Table(name="pattern_category")
+ * @ORM\Entity
+ * @ApiResource
  */
 class PatternCategory
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Pattern", mappedBy="category", orphanRemoval=true)
-     */
-    private $pattern;
-
-    public function __construct()
-    {
-        $this->pattern = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -50,34 +47,5 @@ class PatternCategory
         return $this;
     }
 
-    /**
-     * @return Collection|Pattern[]
-     */
-    public function getPattern(): Collection
-    {
-        return $this->pattern;
-    }
 
-    public function addPattern(Pattern $pattern): self
-    {
-        if (!$this->pattern->contains($pattern)) {
-            $this->pattern[] = $pattern;
-            $pattern->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removePattern(Pattern $pattern): self
-    {
-        if ($this->pattern->contains($pattern)) {
-            $this->pattern->removeElement($pattern);
-            // set the owning side to null (unless already changed)
-            if ($pattern->getCategory() === $this) {
-                $pattern->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
 }
