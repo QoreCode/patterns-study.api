@@ -121,6 +121,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -150,6 +151,8 @@
       <workItem from="1583665036660" duration="2765000" />
       <workItem from="1583668205426" duration="413000" />
       <workItem from="1583759520265" duration="1949000" />
+      <workItem from="1584637563393" duration="936000" />
+      <workItem from="1584639177607" duration="339000" />
     </task>
     <servers />
   </component>

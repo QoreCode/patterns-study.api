@@ -74,12 +74,18 @@ class Pattern
     private $icon;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PatternDiagramm", mappedBy="pattern", orphanRemoval=true)
+     */
+    private $patternDiagramms;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->test = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tasks = new ArrayCollection();
+        $this->patternDiagramms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -202,6 +208,37 @@ class Pattern
     public function setIcon(string $icon): self
     {
         $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PatternDiagramm[]
+     */
+    public function getPatternDiagramms(): Collection
+    {
+        return $this->patternDiagramms;
+    }
+
+    public function addPatternDiagramm(PatternDiagramm $patternDiagramm): self
+    {
+        if (!$this->patternDiagramms->contains($patternDiagramm)) {
+            $this->patternDiagramms[] = $patternDiagramm;
+            $patternDiagramm->setPattern($this);
+        }
+
+        return $this;
+    }
+
+    public function removePatternDiagramm(PatternDiagramm $patternDiagramm): self
+    {
+        if ($this->patternDiagramms->contains($patternDiagramm)) {
+            $this->patternDiagramms->removeElement($patternDiagramm);
+            // set the owning side to null (unless already changed)
+            if ($patternDiagramm->getPattern() === $this) {
+                $patternDiagramm->setPattern(null);
+            }
+        }
 
         return $this;
     }
