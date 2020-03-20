@@ -36,13 +36,13 @@ class ProgramLanguage
     private $code;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PatternDiagramm", mappedBy="programLanguage", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\PatternClass", mappedBy="programLanguage", orphanRemoval=true)
      */
-    private $patternDiagramms;
+    private $patternClasses;
 
     public function __construct()
     {
-        $this->patternDiagramms = new ArrayCollection();
+        $this->patternClasses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -87,30 +87,30 @@ class ProgramLanguage
     }
 
     /**
-     * @return Collection|PatternDiagramm[]
+     * @return Collection|PatternClass[]
      */
-    public function getPatternDiagramms(): Collection
+    public function getPatternClasses(): Collection
     {
-        return $this->patternDiagramms;
+        return $this->patternClasses;
     }
 
-    public function addPatternDiagramm(PatternDiagramm $patternDiagramm): self
+    public function addPatternClass(PatternClass $patternClass): self
     {
-        if (!$this->patternDiagramms->contains($patternDiagramm)) {
-            $this->patternDiagramms[] = $patternDiagramm;
-            $patternDiagramm->setProgramLanguage($this);
+        if (!$this->patternClasses->contains($patternClass)) {
+            $this->patternClasses[] = $patternClass;
+            $patternClass->setProgramLanguage($this);
         }
 
         return $this;
     }
 
-    public function removePatternDiagramm(PatternDiagramm $patternDiagramm): self
+    public function removePatternClass(PatternClass $patternClass): self
     {
-        if ($this->patternDiagramms->contains($patternDiagramm)) {
-            $this->patternDiagramms->removeElement($patternDiagramm);
+        if ($this->patternClasses->contains($patternClass)) {
+            $this->patternClasses->removeElement($patternClass);
             // set the owning side to null (unless already changed)
-            if ($patternDiagramm->getProgramLanguage() === $this) {
-                $patternDiagramm->setProgramLanguage(null);
+            if ($patternClass->getProgramLanguage() === $this) {
+                $patternClass->setProgramLanguage(null);
             }
         }
 

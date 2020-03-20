@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\PatternDiagramm;
+use App\Entity\PatternClass;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method PatternDiagramm|null find($id, $lockMode = null, $lockVersion = null)
- * @method PatternDiagramm|null findOneBy(array $criteria, array $orderBy = null)
- * @method PatternDiagramm[]    findAll()
- * @method PatternDiagramm[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PatternClass|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PatternClass|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PatternClass[]    findAll()
+ * @method PatternClass[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PatternDiagrammRepository extends ServiceEntityRepository
+class PatternClassRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PatternDiagramm::class);
+        parent::__construct($registry, PatternClass::class);
     }
 
     // /**
-    //  * @return PatternDiagramm[] Returns an array of PatternDiagramm objects
+    //  * @return PatternClass[] Returns an array of PatternClass objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PatternDiagrammRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?PatternDiagramm
+    public function findOneBySomeField($value): ?PatternClass
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

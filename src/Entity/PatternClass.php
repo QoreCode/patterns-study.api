@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass="App\Repository\PatternDiagrammRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PatternClassRepository")
  */
-class PatternDiagramm
+class PatternClass
 {
     /**
      * @ORM\Id()
@@ -21,21 +21,26 @@ class PatternDiagramm
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $image;
+    private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $title;
+    private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Pattern", inversedBy="patternDiagramms")
+     * @ORM\Column(type="text")
+     */
+    private $code;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Pattern", inversedBy="patternClasses")
      * @ORM\JoinColumn(nullable=false)
      */
     private $pattern;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProgramLanguage", inversedBy="patternDiagramms")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProgramLanguage", inversedBy="patternClasses")
      * @ORM\JoinColumn(nullable=false)
      */
     private $programLanguage;
@@ -45,26 +50,38 @@ class PatternDiagramm
         return $this->id;
     }
 
-    public function getImage(): ?string
+    public function getName(): ?string
     {
-        return $this->image;
+        return $this->name;
     }
 
-    public function setImage(string $image): self
+    public function setName(string $name): self
     {
-        $this->image = $image;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getTitle(): ?string
+    public function getDescription(): ?string
     {
-        return $this->title;
+        return $this->description;
     }
 
-    public function setTitle(?string $title): self
+    public function setDescription(string $description): self
     {
-        $this->title = $title;
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }

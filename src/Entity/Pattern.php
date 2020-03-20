@@ -26,28 +26,7 @@ class Pattern
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", length=0, nullable=false)
-     */
-    private $description;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="difficult", type="integer", nullable=false)
-     */
-    private $difficult;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="popularity", type="integer", nullable=false)
-     */
-    private $popularity;
-
-    /**
-     * @var \PatternCategory
+     * @var PatternCategory
      *
      * @ORM\ManyToOne(targetEntity="PatternCategory")
      * @ORM\JoinColumns({
@@ -74,9 +53,19 @@ class Pattern
     private $icon;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PatternDiagramm", mappedBy="pattern", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\PatternClass", mappedBy="pattern", orphanRemoval=true)
      */
-    private $patternDiagramms;
+    private $patternClasses;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $problem;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $solution;
 
     /**
      * Constructor
@@ -85,7 +74,7 @@ class Pattern
     {
         $this->test = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tasks = new ArrayCollection();
-        $this->patternDiagramms = new ArrayCollection();
+        $this->patternClasses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,43 +82,7 @@ class Pattern
         return $this->id;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDifficult(): ?int
-    {
-        return $this->difficult;
-    }
-
-    public function setDifficult(int $difficult): self
-    {
-        $this->difficult = $difficult;
-
-        return $this;
-    }
-
-    public function getPopularity(): ?int
-    {
-        return $this->popularity;
-    }
-
-    public function setPopularity(int $popularity): self
-    {
-        $this->popularity = $popularity;
-
-        return $this;
-    }
-
-    public function getCategory(): ?PatternCategory
+    public function getCategory(): PatternCategory
     {
         return $this->category;
     }
@@ -213,32 +166,56 @@ class Pattern
     }
 
     /**
-     * @return Collection|PatternDiagramm[]
+     * @return Collection|PatternClass[]
      */
-    public function getPatternDiagramms(): Collection
+    public function getPatternClasses(): Collection
     {
-        return $this->patternDiagramms;
+        return $this->patternClasses;
     }
 
-    public function addPatternDiagramm(PatternDiagramm $patternDiagramm): self
+    public function addPatternClass(PatternClass $patternClass): self
     {
-        if (!$this->patternDiagramms->contains($patternDiagramm)) {
-            $this->patternDiagramms[] = $patternDiagramm;
-            $patternDiagramm->setPattern($this);
+        if (!$this->patternClasses->contains($patternClass)) {
+            $this->patternClasses[] = $patternClass;
+            $patternClass->setPattern($this);
         }
 
         return $this;
     }
 
-    public function removePatternDiagramm(PatternDiagramm $patternDiagramm): self
+    public function removePatternClass(PatternClass $patternClass): self
     {
-        if ($this->patternDiagramms->contains($patternDiagramm)) {
-            $this->patternDiagramms->removeElement($patternDiagramm);
+        if ($this->patternClasses->contains($patternClass)) {
+            $this->patternClasses->removeElement($patternClass);
             // set the owning side to null (unless already changed)
-            if ($patternDiagramm->getPattern() === $this) {
-                $patternDiagramm->setPattern(null);
+            if ($patternClass->getPattern() === $this) {
+                $patternClass->setPattern(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProblem(): ?string
+    {
+        return $this->problem;
+    }
+
+    public function setProblem(string $problem): self
+    {
+        $this->problem = $problem;
+
+        return $this;
+    }
+
+    public function getSolution(): ?string
+    {
+        return $this->solution;
+    }
+
+    public function setSolution(string $solution): self
+    {
+        $this->solution = $solution;
 
         return $this;
     }
