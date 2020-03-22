@@ -51,6 +51,11 @@ class User
      */
     private $birthday;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\UserRole", inversedBy="users")
+     */
+    private $role;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -100,6 +105,18 @@ class User
     public function setBirthday(?\DateTimeInterface $birthday): self
     {
         $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    public function getRole(): ?UserRole
+    {
+        return $this->role;
+    }
+
+    public function setRole(?UserRole $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }

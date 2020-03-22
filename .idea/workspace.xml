@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd9f0218-c4c7-4d7a-ba96-6f4e52eef38a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Pattern.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Pattern.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/PatternCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PatternCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/PatternDiagramm.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ProgramLanguage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ProgramLanguage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PatternDiagrammRepository.php" beforeDir="false" />
-    </list>
+    <list default="true" id="fd9f0218-c4c7-4d7a-ba96-6f4e52eef38a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -158,7 +151,7 @@
       <workItem from="1584637563393" duration="936000" />
       <workItem from="1584639177607" duration="416000" />
       <workItem from="1584639676916" duration="4855000" />
-      <workItem from="1584718451588" duration="260000" />
+      <workItem from="1584718451588" duration="386000" />
     </task>
     <servers />
   </component>
