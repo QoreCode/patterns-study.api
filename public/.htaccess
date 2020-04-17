@@ -1,0 +1,13 @@
+Header set Access-Control-Allow-Headers "Access-Control-Allow-Credentials, Content-Type, Access-Control-Allow-Headers, Access-Control-Allow-Origin, Authorization, X-Requested-With"
+Header set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS"
+Header set Access-Control-Allow-Origin "http://localhost:8080"
+Header set Access-Control-Expose-Headers ""
+Header set Access-Control-Max-age: "86400"
+Header set Content-Type "application/json"
+
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . ./index.php [L]

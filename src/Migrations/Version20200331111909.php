@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200320153905 extends AbstractMigration
+final class Version20200331111909 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -32,8 +32,7 @@ final class Version20200320153905 extends AbstractMigration
         $this->addSql('CREATE TABLE test (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, question LONGTEXT NOT NULL, image VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE test_pattern (test_id INT NOT NULL, pattern_id INT NOT NULL, INDEX IDX_7FFD28461E5D0459 (test_id), INDEX IDX_7FFD2846F734A20F (pattern_id), PRIMARY KEY(test_id, pattern_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE test_answer (id INT AUTO_INCREMENT NOT NULL, test_id INT DEFAULT NULL, answer LONGTEXT NOT NULL, correct TINYINT(1) NOT NULL, INDEX IDX_4D044D0B1E5D0459 (test_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, login VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, birthday DATETIME DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user_role (id INT AUTO_INCREMENT NOT NULL, role VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, username VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE pattern ADD CONSTRAINT FK_A3BCFC8E12469DE2 FOREIGN KEY (category_id) REFERENCES pattern_category (id)');
         $this->addSql('ALTER TABLE pattern_class ADD CONSTRAINT FK_42972FECF734A20F FOREIGN KEY (pattern_id) REFERENCES pattern (id)');
         $this->addSql('ALTER TABLE pattern_class ADD CONSTRAINT FK_42972FEC4EEBF79C FOREIGN KEY (program_language_id) REFERENCES program_language (id)');
@@ -72,6 +71,5 @@ final class Version20200320153905 extends AbstractMigration
         $this->addSql('DROP TABLE test_pattern');
         $this->addSql('DROP TABLE test_answer');
         $this->addSql('DROP TABLE user');
-        $this->addSql('DROP TABLE user_role');
     }
 }
